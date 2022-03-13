@@ -25,10 +25,8 @@ const formatDate = d => {
   const date = new Date(d);
   const day = date.getDate();
   const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return (
-    days[date.getDay()] + ', ' + zero(day) + '/' + zero(month) + '/' + year
-  );
+  // const year = date.getFullYear();
+  return days[date.getDay()] + ', ' + zero(day) + '/' + zero(month);
 };
 
 const ListItem = ({
@@ -131,8 +129,9 @@ const styles = StyleSheet.create({
   },
   dateTime: {
     textAlign: 'right',
-    fontSize: 11,
+    fontSize: 10,
     marginTop: 15,
+    color: '#111',
   },
 });
 
