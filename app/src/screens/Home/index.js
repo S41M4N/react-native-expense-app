@@ -30,7 +30,7 @@ const Home = ({navigation}) => {
         const array = [];
 
         snapshot.forEach(child => {
-          sum += parseInt(child.child('amount'), 10);
+          sum += parseInt(child.child('amount').val(), 10);
           array.unshift({key: child.key, ...child.val()});
         });
 
