@@ -25,11 +25,13 @@ const AddForm = ({navigation}) => {
 
   useEffect(() => {
     db.ref('/Category')
+      .orderByKey()
       .once('value')
       .then(snapshot => {
         const array = [];
-        const response = snapshot.val();
-        Object.keys(response).forEach(key => array.push(response[key]));
+        snapshot.forEach(item => {
+          array.push(item.val());
+        });
         setCategoryList(array);
       });
   }, []);

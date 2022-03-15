@@ -19,22 +19,25 @@ const Home = ({navigation}) => {
     const today = new Date();
     const path = '/List/' + today.getFullYear() + '/' + (today.getMonth() + 1);
 
-    db.ref(path).on('value', snapshot => {
-      if (!snapshot.val()) {
+    db.ref(path)
+      .orderByChild('date')
+      .on('value', snapshot => {
+        if (!snapshot.val()) {
+          setLoading(false);
+          return;
+        }
+        let sum = 0;
+        const array = [];
+
+        snapshot.forEach(child => {
+          sum += parseInt(child.child('amount'), 10);
+          array.unshift({key: child.key, ...child.val()});
+        });
+
+        setAmount(sum);
+        setData(array);
         setLoading(false);
-        return;
-      }
-      let sum = 0;
-      const array = [];
-      const response = snapshot.val();
-      Object.keys(response).forEach(key => {
-        sum += parseInt(response[key].amount, 10);
-        array.push({id: key, ...response[key]});
       });
-      setAmount(sum);
-      setData(array);
-      setLoading(false);
-    });
   };
 
   useEffect(() => {

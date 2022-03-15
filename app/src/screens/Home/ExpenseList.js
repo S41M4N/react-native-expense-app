@@ -22,7 +22,7 @@ const ExpenseList = ({data, categories}) => {
         data={data}
         renderItem={({item}) => (
           <ListItem
-            id={item.id}
+            id={item.key}
             category={item.category}
             amount={item.amount}
             paymentType={paymentType[item.method]}
@@ -31,7 +31,6 @@ const ExpenseList = ({data, categories}) => {
             icon={parseIcon(item)}
           />
         )}
-        keyExtractor={item => item.timestamp}
       />
     </View>
   );
